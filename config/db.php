@@ -1,20 +1,19 @@
 <?php
-$host = 'shinkansen.proxy.rlwy.net';           // Public Railway host
-$port = 26593;                                  // Port for public access
-$db   = 'railway';                              // Default database name
-$user = 'root';                                 // Username
-$pass = 'CLLEalwgSpDVGxCEjnUNwKbonlxvEBNy';     // Password
-$charset = 'utf8mb4';
+class DB {
+    public static function connect() {
+        $host = 'containers-us-west-123.railway.app';
+        $db   = 'railway';
+        $user = 'root';
+        $pass = 'your_password_here';
+        $port = 1234; // Replace with your actual Railway port
 
-$dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-];
-
-try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-    echo "Connected successfully\n";
-} catch (\PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+        try {
+            $pdo = new PDO("mysql:host=$host;port=$port;dbname=$db", $user, $pass);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "Connected successfully\n";
+            return $pdo;
+        } catch (PDOException $e) {
+            die("Connection failed: " . $e->getMessage());
+        }
+    }
 }
