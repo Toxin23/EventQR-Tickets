@@ -1,23 +1,21 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Writer\PngWriter;
 
 class QRGenerator {
-    public static function generate($ticket_code) {
-        $qrCode = QrCode::create($ticket_code);
-        $writer = new PngWriter();
-        $result = $writer->write($qrCode);
+    public static function generate(string $code): string {
+        $result = Builder::create()
+            ->writer(new PngWriter())
+            ->data($code)
+            ->size(300)
+            ->margin(10)
+            ->build();
 
-        $folder = __DIR__ . '/../qrcodes/';
-        if (!is_dir($folder)) {
-            mkdir($folder, 0777, true);
-        }
+        $path = 'public/qrcodes/' . $code . '.png';
+        $result->saveToFile($path);
 
-        $filePath = $folder . $ticket_code . '.png';
-        $result->saveToFile($filePath);
-
-        return 'qrcodes/' . $ticket_code . '.png';
+        return 'qrcodes/' . $code . '.png';
     }
 }
