@@ -1,0 +1,22 @@
+# Composer
+/vendor/
+/composer.lock
+
+# Laravel
+.env
+/storage/
+/bootstrap/cache/
+
+# Symfony
+/app/config/parameters.yml
+/app/config/parameters.php
+
+# Logs and temp files
+*.log
+*.tmp
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
