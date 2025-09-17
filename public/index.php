@@ -4,23 +4,18 @@ require_once '../src/Ticket.php';
 require_once '../src/QRGenerator.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $method = $_POST['payment_method'];
+    $name = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
+    $method = htmlspecialchars($_POST['payment_method']);
 
-    // Generate unique ticket code
     $code = uniqid('TKT_');
-
-    // Generate QR code image and get its path
     $qr_path = QRGenerator::generate($code);
 
-    // Save ticket to database
     Ticket::create($name, $email, $method, $code, $qr_path);
 
-    // Display confirmation and QR code
     echo "<h3>✅ Ticket Created!</h3>";
     echo "<p><strong>Code:</strong> $code</p>";
-    echo "<img src='../$qr_path' alt='QR Code'>";
+    echo "<img src='$qr_path' alt='QR Code'>";
     echo "<hr>";
 }
 ?>
