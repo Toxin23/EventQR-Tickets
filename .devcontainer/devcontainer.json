@@ -1,9 +1,9 @@
 {
-  "name": "EventQR Custom PHP Container",
-  "build": {
-    "dockerfile": "../Dockerfile",
-    "context": ".."
+  "name": "PHP with GD",
+  "image": "mcr.microsoft.com/devcontainers/php:8.1",
+  "features": {
+    "ghcr.io/devcontainers/features/php-gd:1": {}
   },
-  "forwardPorts": [80],
-  "postCreateCommand": "php -v && php -i | grep pdo_mysql"
+  "forwardPorts": [8080],
+  "postCreateCommand": "composer install"
 }
