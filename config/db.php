@@ -1,11 +1,12 @@
 <?php
-$host = 'localhost';
-$db   = 'eventqr';
-$user = 'root';
-$pass = '';
+$host = 'shinkansen.proxy.rlwy.net';           // Public Railway host
+$port = 26593;                                  // Port for public access
+$db   = 'railway';                              // Default database name
+$user = 'root';                                 // Username
+$pass = 'CLLEalwgSpDVGxCEjnUNwKbonlxvEBNy';     // Password
 $charset = 'utf8mb4';
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
