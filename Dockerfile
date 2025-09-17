@@ -1,6 +1,5 @@
 FROM php:8.1-apache
 
-# Install system dependencies
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
@@ -9,12 +8,10 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    libmysqlclient-dev
+    libmariadb-dev \
+    libmariadb-dev-compat
 
-# Install PHP extensions
 RUN docker-php-ext-install pdo_mysql
-
-# Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
 WORKDIR /var/www/html
